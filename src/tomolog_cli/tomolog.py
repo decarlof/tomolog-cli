@@ -136,6 +136,16 @@ class TomoLog():
         
         return descr
 
+    def publish_note(self, presentation_id, page_id):
+        note = self.args.note
+        if self.args.note != None:
+            log.info('Publish note')
+            self.google_slide.create_textbox_with_text(
+                presentation_id, page_id, note, 300,100, 10, 320, 10, 0
+                )
+        else:
+            pass
+
     def read_rec_line(self):
         line = None
         try:
@@ -177,6 +187,7 @@ class TomoLog():
         
         presentation_id, page_id = self.init_slide()
         self.publish_descr(presentation_id, page_id)
+        self.publish_note(presentation_id, page_id)
         proj = self.read_raw()
         self.publish_proj(presentation_id, page_id, proj)
         recon = self.read_recon()
@@ -197,7 +208,6 @@ class TomoLog():
         self.google_slide.create_slide(presentation_id, page_id)
         self.google_slide.create_textbox_with_text(presentation_id, page_id, os.path.basename(
             self.args.file_name)[:-3], 400, 50, 0, 0, 13, 1)
-
         return presentation_id, page_id
 
     def read_meta_item(self, template):
