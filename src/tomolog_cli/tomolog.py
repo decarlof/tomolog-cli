@@ -199,6 +199,7 @@ class TomoLog():
         recon = self.read_recon()
         #print(recon)
         self.publish_recon(presentation_id, page_id, recon)
+        cloud.cleanup(self.args)
 
     def init_slide(self):
         # create a slide and publish file name
