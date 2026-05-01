@@ -97,6 +97,8 @@ def upload(args, filename):
         dest_dir = '/net/joulefs/coulomb_Public/docroot/tomolog/'
         try:
             dest_path = shutil.copy(filename, os.path.join(dest_dir, uuid_filename))
+            with open(dest_path, 'rb') as f:
+                os.fsync(f.fileno())
             _remote_files.append(dest_path)
             log.info('Image copied to web server directory at %s' % dest_path)
             url = cloud_url + '/' + uuid_filename
