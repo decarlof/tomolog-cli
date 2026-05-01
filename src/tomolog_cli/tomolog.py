@@ -434,7 +434,7 @@ class TomoLog():
             recon_url = cloud.upload(self.args, self.file_name_recon)
             log.info('Publish reconstruction')
             self.google_slide.create_image(
-                presentation_id, page_id, recon_url, 470, 340, 230, 17)
+                presentation_id, page_id, recon_url, 470, 336, 230, 21)
 
             rec_line = self.read_rec_line()
             self.google_slide.create_textbox_with_text(
