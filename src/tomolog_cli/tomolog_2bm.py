@@ -151,7 +151,7 @@ class TomoLog2BM(TomoLog):
         log.info('Publish microCT projection')
         self.google_slide.create_image(
             presentation_id, page_id, proj_url, 120, 120, 30, 180)
-        try:
+        if len(proj) > 1:
             self.google_slide.create_textbox_with_text(
                 presentation_id, page_id, 'Frame from the IP camera in the hutch', 160, 20, 10, 290, 8, 0)
             log.info('Plotting web camera image')
@@ -162,5 +162,5 @@ class TomoLog2BM(TomoLog):
             log.info('Publish web camera image')
             self.google_slide.create_image(
                 presentation_id, page_id, webcam_url, 170, 170, 0, 270)
-        except:
+        else:
             log.warning('No frame from the IP camera')
