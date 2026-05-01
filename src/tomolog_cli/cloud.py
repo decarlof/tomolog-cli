@@ -51,6 +51,7 @@ import os
 import json
 import shutil
 import traceback
+import uuid
 
 from time import sleep
 from tomolog_cli import log
@@ -91,11 +92,14 @@ def upload(args, filename):
         log.info('Uploading image to aps web service')
         cloud_url = 'https://www3.xray.aps.anl.gov/tomolog'
         log.info('Uploading image to %s' % cloud_url)
+        ext = os.path.splitext(filename)[1]
+        dest_filename = f'{uuid.uuid4()}{ext}'
         dest_dir = '/net/joulefs/coulomb_Public/docroot/tomolog/'
         try:
-            dest_path = shutil.copy(filename, os.path.join(dest_dir, 'projection.jpg'))
+            dest_path = shutil.copy(filename, os.path.join(dest_dir, dest_filename))
+            _remote_files.append(dest_path)
             log.info('Image copied to web server directory at %s' % dest_path)
-            url = cloud_url + '/projection.jpg'  # TEMP: hardcoded to test NFS cache theory
+            url = cloud_url + '/' + dest_filename
             log.info('*** Image url created %s' % url)
         except FileNotFoundError:
             traceback.print_exc()
