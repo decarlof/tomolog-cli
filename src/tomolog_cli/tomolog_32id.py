@@ -264,11 +264,16 @@ class TomoLog32ID(TomoLog):
             tmp = [tmp]
         zooms = tmp
         log.info('Zooms selected %s' % zooms)
+        log.info('nct_resolution=%.6f um  binning_rec=%.3f  pixel_size=%.6f um' % (
+            self.nct_resolution, self.binning_rec, self.nct_resolution * 2**self.binning_rec))
         for j in range(3):
             for k in range(3):
                 [s0, s1] = recon[k].shape
                 recon0 = recon[k][s0//2-s0//2//zooms[j]:s0//2+s0//2//zooms[j],
                                    s1//2-s1//2//zooms[j]:s1//2+s1//2//zooms[j]]
+                log.info('zoom=%d slice=%s recon0.shape=%s scalebar_length=%.4f um' % (
+                    zooms[j], slices[k], str(recon0.shape),
+                    recon0.shape[1] * 0.25 * self.nct_resolution * 2**self.binning_rec))
                 recon0[0, 0] = self.args.max
                 recon0[0, 1] = self.args.min
                 recon0[recon0 > self.args.max] = self.args.max
