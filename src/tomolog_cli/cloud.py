@@ -50,6 +50,7 @@ import subprocess
 import os
 import json
 import shutil
+import traceback
 
 from time import sleep
 from tomolog_cli import log
@@ -94,13 +95,13 @@ def upload(args, filename):
             url = cloud_url + '/' + filename
             log.info('*** Image url created %s' % url)
         except FileNotFoundError:
-            print("Source file or destination directory not found.")
+            traceback.print_exc()
         except PermissionError:
-            print("Permission denied.")
+            traceback.print_exc()
         except shutil.SameFileError:
-            print("Source and destination represent the same file.")
+            traceback.print_exc()
         except Exception as e:
-            print(f"Unexpected error: {e}")
+            traceback.print_exc()
     elif args.cloud_service == 'globus':
         log.info('Uploading image to globus')
         log.error('Cloud Serice: %s is not implemented yet' % args.cloud_service)
