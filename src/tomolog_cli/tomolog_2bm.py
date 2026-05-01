@@ -119,7 +119,7 @@ class TomoLog2BM(TomoLog):
                 pitch_angle = -pitch_angle
                 pitch_angle_units = self.read_meta_item("{self.meta[self.sample_pitch_angle_key][1]}")
                 descr += "Pitch angle: " + str(pitch_angle) + pitch_angle_units
-        # descr = descr[:-1]
+        descr = descr[:-1]
         self.google_slide.create_textbox_with_bullets(
             presentation_id, page_id, descr, 240, 120, 0, 18, 8, 0)
 
