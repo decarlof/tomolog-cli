@@ -145,12 +145,12 @@ class TomoLog2BM(TomoLog):
     def publish_proj(self, presentation_id, page_id, proj):
         # 2-BM datasets may include both microCT data and a web camera image
         self.google_slide.create_textbox_with_text(
-            presentation_id, page_id, 'Micro-CT projection', 90, 20, 50, 170, 8, 0)
+            presentation_id, page_id, 'Micro-CT projection', 90, 20, 10, 155, 8, 0)
         self.plot_projection(proj[0], self.file_name_proj0)
         proj_url = cloud.upload(self.args, self.file_name_proj0)
         log.info('Publish microCT projection')
         self.google_slide.create_image(
-            presentation_id, page_id, proj_url, 120, 120, 30, 180)
+            presentation_id, page_id, proj_url, 170, 170, 0, 145)
         if len(proj) > 1:
             self.google_slide.create_textbox_with_text(
                 presentation_id, page_id, 'Frame from the IP camera in the hutch', 160, 20, 10, 290, 8, 0)
