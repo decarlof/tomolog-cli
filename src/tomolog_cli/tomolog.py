@@ -189,7 +189,8 @@ class TomoLog():
         
         self.mct_resolution = float(self.meta[self.pixel_size_key][0]) / float(self.meta[self.magnification_key][0].lower().replace("x", ""))
 
-        
+        self.setup_resolutions()
+
         presentation_id, page_id = self.init_slide()
         self.save_history(self.args.presentation_url)
         self.publish_descr(presentation_id, page_id)
@@ -200,6 +201,9 @@ class TomoLog():
         #print(recon)
         self.publish_recon(presentation_id, page_id, recon)
         cloud.cleanup(self.args)
+
+    def setup_resolutions(self):
+        pass
 
     def init_slide(self):
         # create a slide and publish file name

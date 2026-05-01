@@ -99,9 +99,7 @@ class TomoLog32ID(TomoLog):
         self.google_slide.create_textbox_with_bullets(
             presentation_id, page_id, descr, 240, 120, 0, 18, 8, 0)
 
-    def run_log(self):
-
-        super().run_log()
+    def setup_resolutions(self):
         self.nct_resolution = float(self.meta[self.resolution_key][0])/1000
         self.mct_resolution = float(self.meta[self.pixel_size_key][0])
 
